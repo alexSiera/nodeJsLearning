@@ -23,7 +23,7 @@ const server = http.createServer((req, res) => {
                     res.end(content);
                 }
             )
-        } else if (res.url === "/api/users") {
+        } else if (req.url === "/api/users") {
             res.writeHead(200, {
                 'Content-Type' : "text/json"
             })
