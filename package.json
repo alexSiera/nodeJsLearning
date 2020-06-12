@@ -1,0 +1,26 @@
+{
+  "name": "nodejslearning",
+  "version": "1.0.0",
+  "description": "nodejs tutorial package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexSiera/nodeJsLearning.git"
+  },
+  "keywords": [
+    "nodejs",
+    "js"
+  ],
+  "author": "Alex Unnamed <test@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexSiera/nodeJsLearning/issues"
+  },
+  "homepage": "https://github.com/alexSiera/nodeJsLearning#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
