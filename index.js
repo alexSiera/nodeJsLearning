@@ -1,18 +1,44 @@
 const http = require('http');
+const path = require('path');
+const fs = require('fs');
 const server = http.createServer((req, res) => {
-    console.log(req.url);
-    res.write("<h1>hello from nodeJs</h1>");
-    res.write("<h2>hello from nodeJs</h2>");
-    res.write("<h3>hello from nodeJs</h3>");
-    res.write("<h4>hello from nodeJs</h4>");
-    res.write("<h4>hello from nodeJs</h4>");
-
-
-    res.end(`
-        <div style="background: red; width: 200px; height: 200px">
-            <h4>hello from nodeJs</h4>
-        </div>
-    `);
+    if (req.method === "GET") {
+        res.writeHead(200, {
+            'Content-Type': 'text/html; charset=utf-8'
+        })
+        if (req.url === '/') {
+            fs.readFile(
+                path.join(__dirname, "views", "index.html"),
+                "utf-8", 
+                (err, content) => {
+                    if (err) throw err;
+                    res.end(content)
+                })
+        } else if (req.url === '/about') {
+            fs.readFile(
+                path.join(__dirname, "views", "about.html"),
+                "utf-8",
+                (err, content) => {
+                    if (err) throw err;
+                    res.end(content);
+                }
+            )
+        }
+        } else if (req.method === "POST") {
+        const body = [];
+        res.writeHead(200, {
+            'Content-Type': 'text/html; charset=utf-8',
+        })
+        req.on('data', data => {
+            body.push(Buffer.from(data));
+        });
+        req.on('end', () => {
+            const message = body.toString().replace("title=", "");
+            res.end(`
+                <h1>Your message is: ${message}</h1>
+            `)
+        })
+    }
 });
 const PORT = 3000;
 server.listen(PORT, () => {
