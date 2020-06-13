@@ -9,27 +9,14 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', 'views');
 app.use(express.static('public'));
-
+const homeRoutes = require('./routes/home');
+const addRoutes = require('./routes/add');
+const coursesRoutes = require('./routes/courses');
 
 app
-.get('/', (req, res) => {
-    res.render('index', {
-        title: "Home page",
-        isHome: true
-    });
-})
-.get('/add', (req, res) => {
-    res.render('add', {
-        title: 'Add course',
-        isAdd: true
-    });
-})
-.get('/courses', (req, res) => {
-    res.render('courses', {
-        title: 'Courses',
-        isCourses: true
-    });
-})
+.use(homeRoutes)
+.use(addRoutes)
+.use(coursesRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server is running on port: ${PORT}`))
