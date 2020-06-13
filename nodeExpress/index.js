@@ -13,13 +13,23 @@ app.use(express.static('public'));
 
 app
 .get('/', (req, res) => {
-    res.render('index');
+    res.render('index', {
+        title: "Home page",
+        isHome: true
+    });
 })
-.get('/about', (req, res) => {
-    res.render('about')
+.get('/add', (req, res) => {
+    res.render('add', {
+        title: 'Add course',
+        isAdd: true
+    });
 })
-
-
+.get('/courses', (req, res) => {
+    res.render('courses', {
+        title: 'Courses',
+        isCourses: true
+    });
+})
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server is running on port: ${PORT}`))
